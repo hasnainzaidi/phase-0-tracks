@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Practice Form</title>
+</head>
+<body>
+  <form action="success.html" method="POST">
+    <div>
+      <fieldset>
+        <legend>What is your gender?</legend>
+        <p>
+          <input type="radio" name="gender" id="gender_1" value="Male">
+          <label for="gender_1">Male</label>
+        </p>
+        <p>
+          <input type="radio" name="gender" id="gender_2" value="Feale">
+          <label for="gender_2">Female</label>
+        </p>
+        <p>
+          <input type="radio" name="gender" id="gender_no" value="N/A">
+          <label for="gender_no">Prefer Not to Specify</label>
+        </p>
+        </fieldset>
+    </div>
+    <br>
+    <div>
+      <label>Where are you from?</label>
+      <select name="Origin">
+        <option value="Osaka">Osaka</option>
+        <option value="Tokyo">Tokyo</option>
+        <option value="Hokkaido">Hokkaido</option>
+      </select>
+    </div>
+    <br>
+    <div>
+      <textarea rows="5" cols ="50" placeholder="Please input your favorite restaurants"></textarea>
+    </div>
+    <br>
+    <div>
+      <input type="checkbox" name="cb-likecity" value="agree">
+        I like my city
+    </div>
+    <br>
+    <div>
+      <label>Password:</label>
+      <input type="password" name="password" placeholder="Enter Password">
+    </div>
+    <br>
+    <button type="submit">Submit</button>
+  </form>
+</body>
+</html>
