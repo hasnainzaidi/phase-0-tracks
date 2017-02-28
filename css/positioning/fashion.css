@@ -1,0 +1,21 @@
+.fashionable-octopus{
+  position: relative;
+}
+
+#body{
+  position: absolute;
+  margin-top: 200px;
+  margin-left: 200px;
+}
+
+#headgear{
+  position: absolute;
+  margin-top: 120px;
+  margin-left: 180px;
+}
+
+#eyewear{
+  position: absolute;
+  margin-top: 298px;
+  margin-left: 240px; 
+}
