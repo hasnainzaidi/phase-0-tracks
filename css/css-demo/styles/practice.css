@@ -1,0 +1,22 @@
+#contact-info {
+	font-size: 0.8em;
+}
+
+#contact-info:hover{
+	background-color:red;
+}
+
+.job{
+	background-color: #e9e5dc;
+	border-radius: 25px;
+	padding: 40px 30px;
+}
+
+
+.accomplishments{
+	font-size: 0.8em;
+}
+
+#flames{
+	font-size: 2.8em;
+}
