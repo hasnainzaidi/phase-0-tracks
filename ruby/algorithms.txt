@@ -1,0 +1,52 @@
+Robot Elevator:
+- Note current floor from sign next to elevator door (var current_floor)
+- Ask user for input, "Which floor would you like to go to?" (var target_floor)
+- Compare target_floor with current_floor
+  - If target_floor > current_floor
+    - Press button with up arrow
+  - Else if target floor < current_floor
+    - Press button with down arrow
+  - Else
+    - Say "We are already on that floor"
+- Until elevator door = open
+  - Wait
+- Step into elevator and face number panel
+- Search for button_number = target_floor
+- Press button_number
+- Until elevator door = open
+  - Wait
+- When elevator door = open
+  - Note current floor from sign next to elevator door (var current_floor)
+  - Compare target_floor with current_floor
+      - If target_floor does not equal current_floor
+        - Say "This is not our floor"
+        - Until elevator door = open
+          - Wait
+        - Repeat comparison
+    - If target_floor = current_floor
+      - Say "We have arrived at our floor"
+      - Step out of elevator
+
+
+
+Brushing Teeth:
+- Turn on water
+- Squeeze toothpaste onto brush
+- Wet toothpaste and brush
+- Turn off water
+- Open mouth
+- Insert toothbrush on top left side of mouth
+- Until toothbrush reaches back left top gum wall
+  - Move toothbrush back one tooth
+- Until toothbrush reaches back right bottom gum wall
+  -  Brush current tooth for three seconds
+  -  Move toothbrush one tooth below
+  -  Brush current tooth for three seconds
+  -  Move toothbrush one tooth above
+  -  Move toothbrush one tooth to the right
+- Turn on water
+- Rinse mouth
+- Rinse toothbrush
+- Turn off water
+- Put away toothbrush
+
