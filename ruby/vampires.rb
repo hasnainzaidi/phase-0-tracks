@@ -35,13 +35,24 @@ while counter <= enrollees
       wants_insurance = false
   end
 
+  if loop do
+    puts "Please list your allergies one at at time (type 'done' when complete)"
+    allergy = gets.chomp
+    break true if allergy == "sunshine"
+    break false if allergy == "done"
+  end
+    fear_sun = true
+  else
+    fear_sun = false
+  end
+
   vampire_status = "Results inconclusive."
 
   if age_valid && (eats_garlic || wants_insurance)
     vampire_status = "Probably not"
   end
 
-  if !age_valid && !(eats_garlic || wants_insurance)
+  if fear_sun || (!age_valid && !(eats_garlic || wants_insurance))
     vampire_status = "Probably"
   end
 
@@ -65,3 +76,5 @@ while counter <= enrollees
 
   counter += 1
 end
+
+puts "Actually, never mind! What do these questions have to do with anything? Let's all be friends."
