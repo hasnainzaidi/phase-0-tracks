@@ -1,10 +1,15 @@
 def encrypt(word)
   index = 0 
   while index < word.length 
-  word[index] = word[index].next
+  if word[index]=="z"
+    word[index] = "a"
+  else
+    word[index] = word[index].next
+  end
+
   index += 1 
   end 
- puts word
+  word
 end
 
 def decrypt(word)
@@ -21,10 +26,12 @@ def decrypt(word)
   word[index] = alphabet[new_position]
   index += 1 
   end 
-  puts word 
+  puts word
 end 
 
-encrypt("abc")
-encrypt("zed")
-decrypt("bcd")
-decrypt("afe")
+decrypt(encrypt("swordfish"))
+
+#Nested Method Call:
+#Ruby evaluates the methods one after another. Since encrypt is in parentheses
+#it evaluates that and it passes the value to decrypt.
+#This will work if both methods have already been defined.
