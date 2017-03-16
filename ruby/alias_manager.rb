@@ -13,6 +13,8 @@ def next_consonant(letter)
   if letter == "z" 
     then 
       return "a"
+    elsif (letter.ord < 97) or (letter.ord > 122)
+      return letter
     elsif letter.match(/[dhnt]/) == nil
       return (letter.ord + 1).chr
     else 
@@ -40,10 +42,20 @@ dossier = {}
 loop do
   puts "What is the full real name? Type 'quit' to exit"
   real_name = gets.chomp
+  
+  if real_name == ""
+    then puts "Please type in a full name or 'quit' to exit."
+    redo
+  end
+
   break if real_name == "quit"
 
-#This method will convert a name into an array of components
-#name_array splits the full name into its elements
+  if real_name.match(" ") == nil
+    then puts "Please put in a first AND last name or type 'quit' to exit"
+    redo
+  end
+
+#Split the full name into it's elements
 name_array = real_name.downcase.split(' ')
 first_name = name_array[0]
 last_name = name_array[1]
@@ -68,7 +80,6 @@ end
 
 puts ""
 puts "The full spy list is:"
-puts
 dossier.each {|real, code|
   puts "#{code} is actually #{real.capitalize}"
 }
