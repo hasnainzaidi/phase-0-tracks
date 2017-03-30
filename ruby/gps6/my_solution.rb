@@ -25,36 +25,37 @@ class VirusPredictor
 
 # Calls two of the instance methods
   def virus_effects
-    predicted_deaths(@population_density, @population, @state)
-    speed_of_spread(@population_density, @state)
+    predicted_deaths
+    speed_of_spread
   end
 
-  private
+private
 
 # Takes inputs and calculates number of deaths based on population density
 # Prints out number of deaths predicted in a certain state
-  def predicted_deaths(population_density, population, state)
+  def predicted_deaths
     # predicted deaths is solely based on population density
-    if @population_density >= 200
-      number_of_deaths = (@population * 0.4).floor
-    elsif @population_density >= 150
-      number_of_deaths = (@population * 0.3).floor
-    elsif @population_density >= 100
-      number_of_deaths = (@population * 0.2).floor
-    elsif @population_density >= 50
-      number_of_deaths = (@population * 0.1).floor
-    else
-      number_of_deaths = (@population * 0.05).floor
+
+    @death_rate = case @population_density
+      when 200..Float::INFINITY then 0.4
+      when 150...200 then 0.3
+      when 100...150 then 0.2
+      when 50...100 then 0.1
+      when 0...50 then 0.05
     end
 
     print "#{@state} will lose #{number_of_deaths} people in this outbreak"
+  end
 
+  def number_of_deaths
+    (@population * @death_rate).floor
   end
 
 # Takes inputs and calculates speed of spread based on population density
 # Speed is faster the higher the density
 
-  def speed_of_spread(population_density, state) #in months
+  def speed_of_spread
+    #in months
     # We are still perfecting our formula here. The speed is also affected
     # by additional factors we haven't added into this functionality.
     speed = 0.0
@@ -82,7 +83,6 @@ end
 # DRIVER CODE
  # initialize VirusPredictor for each state
 
-
 alabama = VirusPredictor.new("Alabama", STATE_DATA["Alabama"][:population_density], STATE_DATA["Alabama"][:population])
 alabama.virus_effects
 
@@ -102,3 +102,15 @@ end
 
 #=======================================================================
 # Reflection Section
+
+# Private is good to control who can access a method - it keeps interface and application separate
+# Classes shouldn't expose more than they really need to do. Law of Demeter.
+# This is helpful when working with others - don't want to open up more than is really needed.
+# Otherwise you can accidentally break things.
+# People will expect public API not to change that much. Private API is fair game for changes.
+
+
+
+
+
+
