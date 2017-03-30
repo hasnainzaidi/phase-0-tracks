@@ -4,18 +4,26 @@
 # We spent [#] hours on this challenge.
 
 # EXPLANATION OF require_relative
-#
-#
+# The difference is based on where the file is being loaded from. 
+# require_relative is used if the required file is in the same directory
+
+# require is used primarily to require files from the ruby library 
+# but it can take an absolute path to find something on your local machine
+# It is useful for Ruby gems and shims
+
 require_relative 'state_data'
 
+# Defines a class
 class VirusPredictor
 
+# Setting up what happens when you create an instance of the Class and define certain variables
   def initialize(state_of_origin, population_density, population)
     @state = state_of_origin
     @population = population
     @population_density = population_density
   end
 
+# Calls two of the instance methods
   def virus_effects
     predicted_deaths(@population_density, @population, @state)
     speed_of_spread(@population_density, @state)
@@ -23,6 +31,8 @@ class VirusPredictor
 
   private
 
+# Takes inputs and calculates number of deaths based on population density
+# Prints out number of deaths predicted in a certain state
   def predicted_deaths(population_density, population, state)
     # predicted deaths is solely based on population density
     if @population_density >= 200
@@ -40,6 +50,9 @@ class VirusPredictor
     print "#{@state} will lose #{number_of_deaths} people in this outbreak"
 
   end
+
+# Takes inputs and calculates speed of spread based on population density
+# Speed is faster the higher the density
 
   def speed_of_spread(population_density, state) #in months
     # We are still perfecting our formula here. The speed is also affected
@@ -82,6 +95,10 @@ california.virus_effects
 alaska = VirusPredictor.new("Alaska", STATE_DATA["Alaska"][:population_density], STATE_DATA["Alaska"][:population])
 alaska.virus_effects
 
+STATE_DATA.each do |state, population_hash|
+  current_state = VirusPredictor.new(state, population_hash[:population_density],population_hash[:population])
+  current_state.virus_effects
+end
 
 #=======================================================================
 # Reflection Section
