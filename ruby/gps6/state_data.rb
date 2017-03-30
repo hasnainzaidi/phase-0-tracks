@@ -1,6 +1,16 @@
 #population density is number of people per square mile as of 2012
 #this data is updated every year with estimates from a 10 year census
 
+# Symbols are unique and immutable which makes them well-suited for hash-keys
+# They are faster to instantiate and compare to other items than strings
+# Useful when importing millions of rows data - you'll want to import CSV in terms of symbol hash keys
+# Avoid using user input for symbols (they aren't garbage collected... they stay in memory forever)
+
+# Hash rocket is necessary if you're not using a symbol otherwise must use ":"
+
+# STATE_DATA is a constant. This is for data that doesn't change.
+# Constants are signified by all caps and snake case
+# Scope on constants is global
 
 STATE_DATA = {
   "Alabama" => {population_density: 94.65, population: 4822023},

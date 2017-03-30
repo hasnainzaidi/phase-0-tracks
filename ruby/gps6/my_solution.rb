@@ -4,44 +4,58 @@
 # We spent [#] hours on this challenge.
 
 # EXPLANATION OF require_relative
-#
-#
+# The difference is based on where the file is being loaded from. 
+# require_relative is used if the required file is in the same directory
+
+# require is used primarily to require files from the ruby library 
+# but it can take an absolute path to find something on your local machine
+# It is useful for Ruby gems and shims
+
 require_relative 'state_data'
 
+# Defines a class
 class VirusPredictor
 
+# Setting up what happens when you create an instance of the Class and define certain variables
   def initialize(state_of_origin, population_density, population)
     @state = state_of_origin
     @population = population
     @population_density = population_density
   end
 
+# Calls two of the instance methods
   def virus_effects
-    predicted_deaths(@population_density, @population, @state)
-    speed_of_spread(@population_density, @state)
+    predicted_deaths
+    speed_of_spread
   end
 
-  private
+private
 
-  def predicted_deaths(population_density, population, state)
+# Takes inputs and calculates number of deaths based on population density
+# Prints out number of deaths predicted in a certain state
+  def predicted_deaths
     # predicted deaths is solely based on population density
-    if @population_density >= 200
-      number_of_deaths = (@population * 0.4).floor
-    elsif @population_density >= 150
-      number_of_deaths = (@population * 0.3).floor
-    elsif @population_density >= 100
-      number_of_deaths = (@population * 0.2).floor
-    elsif @population_density >= 50
-      number_of_deaths = (@population * 0.1).floor
-    else
-      number_of_deaths = (@population * 0.05).floor
+
+    @death_rate = case @population_density
+      when 200..Float::INFINITY then 0.4
+      when 150...200 then 0.3
+      when 100...150 then 0.2
+      when 50...100 then 0.1
+      when 0...50 then 0.05
     end
 
     print "#{@state} will lose #{number_of_deaths} people in this outbreak"
-
   end
 
-  def speed_of_spread(population_density, state) #in months
+  def number_of_deaths
+    (@population * @death_rate).floor
+  end
+
+# Takes inputs and calculates speed of spread based on population density
+# Speed is faster the higher the density
+
+  def speed_of_spread
+    #in months
     # We are still perfecting our formula here. The speed is also affected
     # by additional factors we haven't added into this functionality.
     speed = 0.0
@@ -69,7 +83,6 @@ end
 # DRIVER CODE
  # initialize VirusPredictor for each state
 
-
 alabama = VirusPredictor.new("Alabama", STATE_DATA["Alabama"][:population_density], STATE_DATA["Alabama"][:population])
 alabama.virus_effects
 
@@ -82,6 +95,22 @@ california.virus_effects
 alaska = VirusPredictor.new("Alaska", STATE_DATA["Alaska"][:population_density], STATE_DATA["Alaska"][:population])
 alaska.virus_effects
 
+STATE_DATA.each do |state, population_hash|
+  current_state = VirusPredictor.new(state, population_hash[:population_density],population_hash[:population])
+  current_state.virus_effects
+end
 
 #=======================================================================
 # Reflection Section
+
+# Private is good to control who can access a method - it keeps interface and application separate
+# Classes shouldn't expose more than they really need to do. Law of Demeter.
+# This is helpful when working with others - don't want to open up more than is really needed.
+# Otherwise you can accidentally break things.
+# People will expect public API not to change that much. Private API is fair game for changes.
+
+
+
+
+
+
